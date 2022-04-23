@@ -40,11 +40,20 @@ lsusb
 
 #   # hw-probe: installation
 
+sudo apt update
 sudo apt install hw-probe --no-install-recommends
 
 #   # hw-probe: 1st execution
 
 sudo -E hw-probe -all -upload
+
+#WARNING: 'edid-decode' package is not installed
+#Probe for hardware ... Ok
+#Reading logs ... WARNING: X11-related logs are not collected (try to run 'xhost +local:' to enable access or run as root by su)
+#Ok
+#Uploaded to DB, Thank you!
+#
+Probe URL: https://linux-hardware.org/?probe=99d66ae8c3
 ```
 
 ```shell
