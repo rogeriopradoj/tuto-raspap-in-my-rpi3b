@@ -137,6 +137,9 @@ sudo zerotier-cli info
 sudo zerotier-cli join 1234567890123456
 
 #200 join OK
+
+# access via web browser https://my.zerotier.com/network/1234567890123456
+#     and authorize 1234567890
 ```
 
 ```shell
