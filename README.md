@@ -8,8 +8,70 @@ Tutorial on how I've installed ZeroTier & RaspAP in my Raspberry Pi 3B & 2 hw ad
 - [tp-link UE330 (Hub USB 3.0 and RJ45 Gigabit)](https://www.tp-link.com/en/support/download/ue330/)
 - [tp-link Archer T2U Plus (ac600 wi-fi usb)](https://www.tp-link.com/en/support/download/archer-t2u-plus/)
 
-# Software
+## Software
 
 - OS: [Raspberry Pi OS	(32-bit) Lite - Bullseye](https://www.raspberrypi.org/software/operating-systems/#raspberry-pi-os-32-bit)
 - Plus One: [ZeroTier - Global Area Networking](https://www.zerotier.com/)
 - Plus Two: [RaspAP: The easiest, full-featured wireless router setup for Debian-based devices. Period.](https://raspap.com/)
+
+## Steps
+
+```shell
+# update system
+
+sudo apt-get update
+sudo apt-get full-upgrade
+sudo reboot
+```
+
+```shell
+# find vendor and id from external hardware
+  
+#   # usb devices that were currently plugged
+
+lsusb
+
+#
+#Bus 001 Device 007: ID 0bda:8153 Realtek Semiconductor Corp. ç Gigabit Ethernet Adapter
+#Bus 001 Device 006: ID 2357:0120 TP-Link Archer T2U PLUS [RTL8821AU]
+#
+#...
+#
+
+#   # hw-probe: installation
+
+sudo apt install hw-probe --no-install-recommends
+
+#   # hw-probe: 1st execution
+
+sudo -E hw-probe -all -upload
+```
+
+```shell
+# install missing drivers based on microchip of device
+
+# # wifi (Realtek RTL8821AU)
+
+# # gigabit ethernet (Realtek ## wifi (Realtek RTL8821AU))
+```
+
+```shell
+#   # hw-probe: 2nd execution
+
+sudo -E hw-probe -all -upload
+```
+
+```shell
+# install zerotier
+#   (https://www.zerotier.com/download/#downloadLinux)
+
+curl -s 'https://raw.githubusercontent.com/zerotier/ZeroTierOne/master/doc/contact%40zerotier.com.gpg' | gpg --import && \
+if z=$(curl -s 'https://install.zerotier.com/' | gpg); then echo "$z" | sudo bash; fi
+```
+
+```shell
+# install raspap 
+#   (https://raspap.com/#quick)
+
+curl -sL https://install.raspap.com | bash
+```
