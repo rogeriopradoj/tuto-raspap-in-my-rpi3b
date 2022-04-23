@@ -125,6 +125,18 @@ if z=$(curl -s 'https://install.zerotier.com/' | gpg); then echo "$z" | sudo bas
 #*** Waiting for identity generation...
 #
 #*** Success! You are ZeroTier address [ 1234567890 ].
+
+sudo zerotier-cli info
+
+#200 info 1234567890 1.8.7 ONLINE
+
+sudo zerotier-cli info
+
+#200 info 1234567890 1.8.7 ONLINE
+
+sudo zerotier-cli join 1234567890123456
+
+#200 join OK
 ```
 
 ```shell
