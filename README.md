@@ -140,6 +140,21 @@ sudo zerotier-cli join 1234567890123456
 
 # access via web browser https://my.zerotier.com/network/1234567890123456
 #     and authorize 1234567890
+
+# after, come back to terminal and see if the zerotier interface got a ip address
+
+ifconfig zt12345678
+
+#zt12345678: flags=4163<UP,BROADCAST,RUNNING,MULTICAST>  mtu 2800
+#        inet 192.168.191.36  netmask 255.255.255.0  broadcast 192.168.191.255
+#        inet 192.168.191.1  netmask 255.255.255.0  broadcast 192.168.191.255
+#        inet6 fdaf:1234:1234:1234:1234:1234:1234:1234  prefixlen 88  scopeid 0x0<global>
+#        inet6 fe80::1234:1234:1234:1234  prefixlen 64  scopeid 0x20<link>
+#        ether 5a:12:12:12:12:12  txqueuelen 1000  (Ethernet)
+#        RX packets 14  bytes 6790 (6.6 KiB)
+#        RX errors 0  dropped 0  overruns 0  frame 0
+#        TX packets 46  bytes 6173 (6.0 KiB)
+#        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
 ```
 
 ```shell
