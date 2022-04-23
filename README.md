@@ -59,9 +59,44 @@ Probe URL: https://linux-hardware.org/?probe=99d66ae8c3
 ```shell
 # install missing drivers based on microchip of device
 
-# # wifi (Realtek RTL8821AU)
+#     # wifi (Realtek RTL8821AU)
+#         (https://github.com/morrownr/8821au)
 
-# # gigabit ethernet (Realtek ## wifi (Realtek RTL8821AU))
+sudo apt update && sudo apt upgrade
+sudo reboot
+
+sudo apt install -y raspberrypi-kernel-headers bc build-essential dkms git
+
+mkdir -p ~/src
+cd ~/src
+
+git clone https://github.com/morrownr/8821au-20210708.git
+cd ~/src/8821au-20210708
+
+./ARM_RPI.sh
+
+sudo ./install-driver.sh
+lsusb
+ifconfig
+
+cd src/8821au-20210708/
+sudo ./edit-options.sh
+sudo iw reg get
+dkms status
+sudo shutdown -r now
+
+dkms status
+sudo iw reg get
+ip a
+lsusb
+sudo iw reg get
+sudo nano /etc/default/crda
+sudo iw reg get
+sudo iw reg set BR
+sudo iw reg get
+history
+
+# # gigabit ethernet (Realtek ## wifi (Realtek RTL8153))
 ```
 
 ```shell
