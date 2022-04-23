@@ -162,4 +162,13 @@ ifconfig zt12345678
 #   (https://raspap.com/#quick)
 
 curl -sL https://install.raspap.com | bash
+
+#[ ✓ ok ]
+#RaspAP Install: Installation completed
+#Join RaspAP Insiders for early access to exclusive features!
+#
+#> https://docs.raspap.com/insiders/
+#> https://github.com/sponsors/RaspAP/
+#
+#The system needs to be rebooted as a final step. Reboot now? [y/N]: y
 ```
