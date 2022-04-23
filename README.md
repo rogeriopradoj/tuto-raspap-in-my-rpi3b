@@ -119,6 +119,12 @@ Probe URL: https://linux-hardware.org/?probe=e4d563d75b
 
 curl -s 'https://raw.githubusercontent.com/zerotier/ZeroTierOne/master/doc/contact%40zerotier.com.gpg' | gpg --import && \
 if z=$(curl -s 'https://install.zerotier.com/' | gpg); then echo "$z" | sudo bash; fi
+
+#...
+#
+#*** Waiting for identity generation...
+#
+#*** Success! You are ZeroTier address [ 1234567890 ].
 ```
 
 ```shell
