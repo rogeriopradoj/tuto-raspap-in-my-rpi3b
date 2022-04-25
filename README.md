@@ -172,3 +172,70 @@ curl -sL https://install.raspap.com | bash
 #
 #The system needs to be rebooted as a final step. Reboot now? [y/N]: y
 ```
+
+```shell
+# rogeriopradoj: config "bridge" between wlan0 (AP) and wlan1 (wifi-client)
+# https://github.com/RaspAP/raspap-webgui/discussions/878
+
+# install ifmetric
+sudo apt install ifmetric
+
+# set a low value for wlan1
+sudo ifmetric wlan1 100
+
+# make it permanent, ading the following to /etc/dhcpcd.conf makes the change permanent.
+# (sudo vi /etc/dhcpcd.conf)
+
+interface wlan1
+metric 100
+
+# reboot system
+sudo reboot
+
+```
+
+```shell
+# rogeriopradoj: what was changed by ifmetric? route priority
+
+# final result
+
+> sudo route
+# Kernel IP routing table
+# Destination     Gateway         Genmask         Flags Metric Ref    Use Iface
+# default         menuvivofibra   0.0.0.0         UG    100    0        0 wlan1
+# default         10.3.141.1      0.0.0.0         UG    303    0        0 wlan0
+# 10.3.141.0      0.0.0.0         255.255.255.0   U     303    0        0 wlan0
+# 192.168.0.0     192.168.191.3   255.255.255.0   UG    5000   0        0 zthnhjmvln
+# 192.168.15.0    0.0.0.0         255.255.255.0   U     100    0        0 wlan1
+# 192.168.191.0   0.0.0.0         255.255.255.0   U     0      0        0 zthnhjmvln
+
+
+
+# before config, wlan0 (AP) + wlan1 (as wi-fi client connected to internet)
+
+> sudo route
+Kernel IP routing table
+# Destination     Gateway         Genmask         Flags Metric Ref    Use Iface
+# default         10.3.141.1      0.0.0.0         UG    303    0        0 wlan0
+# default         menuvivofibra   0.0.0.0         UG    305    0        0 wlan1
+# 10.3.141.0      0.0.0.0         255.255.255.0   U     303    0        0 wlan0
+# 192.168.0.0     192.168.191.3   255.255.255.0   UG    5000   0        0 zthnhjmvln
+# 192.168.15.0    0.0.0.0         255.255.255.0   U     305    0        0 wlan1
+# 192.168.191.0   0.0.0.0         255.255.255.0   U     0      0        0 zthnhjmvln
+
+
+# before config, eth0 (as cabled client connect to internet) wlan0 (AP) + wlan1 (wi-fi client connected to internet)
+
+> sudo route
+# Kernel IP routing table
+# Destination     Gateway         Genmask         Flags Metric Ref    Use Iface
+# default         menuvivofibra   0.0.0.0         UG    202    0        0 eth0
+# default         10.3.141.1      0.0.0.0         UG    303    0        0 wlan0
+# default         menuvivofibra   0.0.0.0         UG    305    0        0 wlan1
+# 10.3.141.0      0.0.0.0         255.255.255.0   U     303    0        0 wlan0
+# 192.168.0.0     192.168.191.3   255.255.255.0   UG    5000   0        0 zthnhjmvln
+# 192.168.15.0    0.0.0.0         255.255.255.0   U     202    0        0 eth0
+# 192.168.15.0    0.0.0.0         255.255.255.0   U     305    0        0 wlan1
+# 192.168.191.0   0.0.0.0         255.255.255.0   U     0      0        0 zthnhjmvln
+
+```
